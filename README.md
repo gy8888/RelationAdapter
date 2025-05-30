@@ -7,17 +7,17 @@
   <a href='https://huggingface.co/spaces/jieliu/SD3.5-M-Flow-GRPO'><img src='https://img.shields.io/badge/Demo-blue?logo=huggingface'></a> &nbsp;
 </div>
 
-<img src='./assets/teaser.pdf' width='100%' />
+<img src='./assets/teaser.png' width='100%' />
 
 ## Quick Start
 ### Configuration
 #### 1. **Environment setup**
 ```bash
-git clone git@github.com:showlab/PhotoDoodle.git
-cd PhotoDoodle
+git clone git@github.com:gy8888/RelationAdapter.git
+cd RelationAdapter
 
-conda create -n doodle python=3.11.10
-conda activate doodle
+conda create -n RelationAdapter python=3.11.10
+conda activate RelationAdapter
 ```
 #### 2. **Requirements installation**
 ```bash
@@ -29,68 +29,14 @@ pip install --upgrade -r requirements.txt
 ### 2. Inference
 We provided the integration of diffusers pipeline with our model and uploaded the model weights to huggingface, it's easy to use the our model as example below:
 
-```bash
-from src.pipeline_pe_clone import FluxPipeline
-import torch
-from PIL import Image
-
-pretrained_model_name_or_path = "black-forest-labs/FLUX.1-dev"
-pipeline = FluxPipeline.from_pretrained(
-    pretrained_model_name_or_path,
-    torch_dtype=torch.bfloat16,
-).to('cuda')
-
-pipeline.load_lora_weights("nicolaus-huang/PhotoDoodle", weight_name="pretrain.safetensors")
-pipeline.fuse_lora()
-pipeline.unload_lora_weights()
-
-pipeline.load_lora_weights("nicolaus-huang/PhotoDoodle", weight_name="sksmagiceffects.safetensors")
-
-height=768
-width=512
-
-validation_image = "assets/1.png"
-validation_prompt = "add a halo and wings for the cat by sksmagiceffects"
-condition_image = Image.open(validation_image).resize((height, width)).convert("RGB")
-
-result = pipeline(prompt=validation_prompt, 
-                  condition_image=condition_image,
-                  height=height,
-                  width=width,
-                  guidance_scale=3.5,
-                  num_inference_steps=20,
-                  max_sequence_length=512).images[0]
-
-result.save("output.png")
+simply run the inference script:
+```
+python infer_single.py
 ```
 
-or simply run the inference script:
-```
-python inference.py
-```
 
-### 3. Train
-
-#### 3.1 Get data from huggingface dataset
-```
-huggingface-cli download --repo-type dataset --local-dir data nicolaus-huang/PhotoDoodle
-```
-
-#### 3.2 Get pretrained model for edit-lora trainning
-```
-python merge_pretrain.py
-```
-
-#### 3.3 Train!
-```
-bash train_sksmonstercalledlulu.sh
-```
-
-For personalized PhotoDoodles, please check the data folder and orgnize data like ours.
-
-
-### 4. Weights
-You can download the trained checkpoints of PhotoDoodle for inference. Below are the details of available models, checkpoint name are also trigger words.
+### 3. Weights
+You can download the trained checkpoints of RelationAdapter for inference. Below are the details of available models, checkpoint name are also trigger words.
 
 You would need to load and fuse the `pretrained ` checkpoints model in order to load the other models.
 
@@ -103,7 +49,7 @@ You would need to load and fuse the `pretrained ` checkpoints model in order to 
 | [sksedgeeffect ](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/sksedgeeffect.safetensors) |  PhotoDoodle model trained on `Hand-drawn outline` dataset  |    768, 512    |
 
 
-### 5. Dataset
+### 4. Dataset
 <span id="dataset_setting"></span>
 #### 2.1 Settings for dataset
 The training process uses a paired dataset stored in a .jsonl file, where each entry contains image file paths and corresponding text descriptions. Each entry includes the source image path, the target (modified) image path, and a caption describing the modification.
@@ -118,17 +64,10 @@ Example format:
 We have uploaded our datasets to [Hugging Face](https://huggingface.co/datasets/nicolaus-huang/PhotoDoodle).
 
 
-### 6. Results
+### 5. Results
 
-![R-F](./assets/R-F.jpg)
+![S-U](./assets/result_show.png)
 
-
-### 7. Acknowledgments  
-
-1. Thanks to **[Yuxuan Zhang](https://xiaojiu-z.github.io/YuxuanZhang.github.io/)** and **[Hailong Guo](mailto:guohailong@bupt.edu.cn)** for providing the code base.  
-2. Thanks to **[Diffusers](https://github.com/huggingface/diffusers)** for the open-source project.
-3. Thanks to **[AMEERAZAM08](https://github.com/AMEERAZAM08)** for contributing the huggingface space demo.
-4. Thanks to **[smthemex](https://github.com/smthemex)** for contributing the comfyui integration.
 
 ## Citation
 ```
