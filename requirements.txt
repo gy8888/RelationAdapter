@@ -1,0 +1,14 @@
+datasets==3.5.0
+diffusers==0.32.2
+numpy==1.26.4
+Pillow==11.2.1
+tqdm==4.67.1
+transformers==4.44.0
+accelerate==0.33.0
+protobuf==5.29.4
+sentencepiece==0.2.0
+peft==0.15.1
+
+
+# torch==2.5.1+cu124
+# torchvision==0.20.1+cu124
