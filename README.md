@@ -1,11 +1,23 @@
-<h1 align="center"> RelationAdapter: Learning and Transferring Visual Relation with Diffusion Transformers </h1>
-<div align="center">
-  <a href='https://arxiv.org/abs/2505.05470'><img src='https://img.shields.io/badge/ArXiv-red?logo=arxiv'></a>  &nbsp;
-  <a href='https://gongyeliu.github.io/Flow-GRPO/'><img src='https://img.shields.io/badge/Visualization-green?logo=github'></a> &nbsp;
-  <a href="https://github.com/yifan123/flow_grpo"><img src="https://img.shields.io/badge/Code-9E95B7?logo=github"></a> &nbsp; 
-  <a href='https://huggingface.co/collections/jieliu/sd35m-flowgrpo-68298ec27a27af64b0654120'><img src='https://img.shields.io/badge/Model-blue?logo=huggingface'></a> &nbsp; 
-  <a href='https://huggingface.co/spaces/jieliu/SD3.5-M-Flow-GRPO'><img src='https://img.shields.io/badge/Demo-blue?logo=huggingface'></a> &nbsp;
-</div>
+# RelationAdapter
+
+> **RelationAdapter: Learning and Transferring Visual Relation with Diffusion Transformers**
+> <br>
+> Yan Gong, 
+> Yiren Song, 
+> Yicheng Li, 
+> Chenglin Li, 
+> and 
+> Yin Zhang,
+> <br>
+> Zhejiang University, National University of Singapore
+> <br>
+
+<a href="https://arxiv.org/abs/2502.14397"><img src="https://img.shields.io/badge/ariXv-2502.14397-A42C25.svg" alt="arXiv"></a>
+<a href="https://huggingface.co/nicolaus-huang/PhotoDoodle"><img src="https://img.shields.io/badge/🤗_HuggingFace-Model-ffbd45.svg" alt="HuggingFace"></a>
+<a href="https://huggingface.co/datasets/nicolaus-huang/PhotoDoodle/"><img src="https://img.shields.io/badge/🤗_HuggingFace-Dataset-ffbd45.svg" alt="HuggingFace"></a>
+<a href="https://huggingface.co/spaces/ameerazam08/PhotoDoodle-Image-Edit-GPU"><img src="https://img.shields.io/badge/🤗_HuggingFace-Space-ffbd45.svg" alt="HuggingFace"></a>
+
+<br>
 
 <img src='./assets/teaser.png' width='100%' />
 
