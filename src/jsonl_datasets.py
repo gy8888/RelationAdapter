@@ -46,7 +46,7 @@ def make_train_dataset(args, tokenizer, accelerator=None):
             raise ValueError(
                 f"`--target_column` value '{args.target_column}' not found in dataset columns. Dataset columns are: {', '.join(column_names)}"
             )
-    #gy修改 加两张条件图片作为columnname
+    #Add two images as columnname
     if args.ipa_source_column is None:
         ipa_source_column = column_names[3]
         print(f"ipa-source column defaulting to {ipa_source_column}")
@@ -66,25 +66,18 @@ def make_train_dataset(args, tokenizer, accelerator=None):
                 f"`--ipa_target_column` value '{args.ipa_target_column}' not found in dataset columns. Dataset columns are: {', '.join(column_names)}"
             )
 
-    #gy修改 这边要改成支持多桶训练  
     def resize_long_side(img, target_long_side, interpolation=transforms.InterpolationMode.BILINEAR):
-        # 获取图像宽和高。注意：PIL 图像返回的是 (宽, 高)
         w, h = img.size  
-        # 判断哪个边更长
         if w >= h:
-            # 若宽边更长，则将宽设为目标尺寸，同时按比例调整高度
             new_w = target_long_side
             new_h = int(target_long_side * h / w)
         else:
-            # 若高边更长，则将高设为目标尺寸，同时按比例调整宽度
             new_h = target_long_side
             new_w = int(target_long_side * w / h)
-        # 使用 functional.resize 完成尺寸调整，注意传入的是 (高度, 宽度)
         return F.resize(img, (new_h, new_w), interpolation=interpolation)
 
     train_transforms = transforms.Compose(
         [
-            # 使用 Lambda 包装自定义的 resize_long_side 函数
             transforms.Lambda(lambda img: resize_long_side(img, args.resolution, interpolation=transforms.InterpolationMode.BILINEAR)),
             transforms.ToTensor(),
             transforms.Normalize([0.5], [0.5]),
@@ -140,7 +133,7 @@ def make_train_dataset(args, tokenizer, accelerator=None):
         _examples["pixel_values"] = [train_transforms(image) for image in target_images]
         _examples["token_ids_clip"], _examples["token_ids_t5"] = tokenize_prompt_clip_t5(examples)
 
-        # gy修改 加载clip pre-processor
+        # clip pre-processor
         # ————————————————————————————————————————————————————————
         clip_image_processor = AutoProcessor.from_pretrained('../models/siglip-so400m-patch14-384')
         ipa_source_images = [Image.open(os.path.join(base_path, image)).convert("RGB") 
@@ -172,7 +165,6 @@ def collate_fn(examples):
     cond_pixel_values = cond_pixel_values.to(memory_format=torch.contiguous_format).float()
     target_pixel_values = torch.stack([example["pixel_values"] for example in examples])
     target_pixel_values = target_pixel_values.to(memory_format=torch.contiguous_format).float()
-    # gy修改
     # token_ids_clip = torch.stack([torch.tensor(example["token_ids_clip"]) for example in examples])
     # token_ids_t5 = torch.stack([torch.tensor(example["token_ids_t5"]) for example in examples])
     
@@ -187,7 +179,6 @@ def collate_fn(examples):
         for example in examples
     ])
 
-    # gy修改
     # ————————————————————————————————————————————————————————————————————————————
     ipa_source_pixel_values = torch.cat([example["ipa_source_images"] for example in examples])
     ipa_source_pixel_values = ipa_source_pixel_values.to(memory_format=torch.contiguous_format).float()
