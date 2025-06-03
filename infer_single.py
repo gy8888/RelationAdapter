@@ -199,16 +199,21 @@ class IPAdapter:
 # ======================== Parameter Setup ===========================
 BASE_MODEL_PATH = '../models/FLUX.1-dev'
 IMAGE_ENCODER_PATH = '../models/siglip-so400m-patch14-384'
-IPADAPTER_PATH = '/opt/liblibai-models/user-workspace2/users/gy/ipadapter/PhotoDoodle/outputs-four-gpu/my_model/checkpoint-100000-ip-adapter/ip_adapter-100000.bin'
-LORA_WEIGHTS_PATH = "/opt/liblibai-models/user-workspace2/users/gy/ipadapter/PhotoDoodle/outputs-four-gpu/my_model/checkpoint-100000-lora"
+IPADAPTER_PATH = '../models/ip_adapter-100000.bin'
+LORA_WEIGHTS_PATH = "../models/checkpoint-100000-lora"
 LORA_WEIGHTS_FILE = "pytorch_lora_weights.safetensors"
-DEVICE = "cuda:5"
+DEVICE = "cuda:0"
 
 # ========== Sample Image Paths ==========
-cond1_path = "../Data_doodle_ipa_test_seen/1-TeethAlignment/Group1/000001-1.jpg"
-cond2_path = "../Data_doodle_ipa_test_seen/1-TeethAlignment/Group1/000001-2.jpg"
-source_path = "../Data_doodle_ipa_test_seen/1-TeethAlignment/Group1/000001-3.jpg"
-prompt = "Align the teeth and enhance teeth whiteness"
+# cond1_path = "assets/close-eye-cond1.jpg"
+# cond2_path = "assets/close-eye-cond2.jpg"
+# source_path = "assets/close-eye-src1.jpg"
+# prompt = "Apply a closed-eyes expression to the person in the image."
+
+cond1_path = "assets/close-on-cond1.jpg"
+cond2_path = "assets/close-on-cond2.jpg"
+source_path = "assets/close-on-src1.jpg"
+prompt = "Add a model wearing the black pants along with a taupe polo shirt and white sneakers, standing in a neutral pose."
 
 # ======================== Model Setup ===========================
 transformer = FluxTransformer2DModel.from_pretrained(
@@ -247,7 +252,4 @@ generated_images = ip_model.generate(
 )
 
 # ======================== Show Result ===========================
-# generated_images[0].show()  # 显示生成图像
-
-# （可选）保存结果
 generated_images[0].save("generated.jpg")
