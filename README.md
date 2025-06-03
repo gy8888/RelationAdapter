@@ -7,7 +7,7 @@
 > Yicheng Li, 
 > Chenglin Li, 
 > and 
-> Yin Zhang,
+> Yin Zhang
 > <br>
 > Zhejiang University, National University of Singapore
 > <br>
@@ -15,7 +15,6 @@
 <a href="https://arxiv.org/abs/2502.14397"><img src="https://img.shields.io/badge/ariXv-2502.14397-A42C25.svg" alt="arXiv"></a>
 <a href="https://huggingface.co/nicolaus-huang/PhotoDoodle"><img src="https://img.shields.io/badge/🤗_HuggingFace-Model-ffbd45.svg" alt="HuggingFace"></a>
 <a href="https://huggingface.co/datasets/nicolaus-huang/PhotoDoodle/"><img src="https://img.shields.io/badge/🤗_HuggingFace-Dataset-ffbd45.svg" alt="HuggingFace"></a>
-<a href="https://huggingface.co/spaces/ameerazam08/PhotoDoodle-Image-Edit-GPU"><img src="https://img.shields.io/badge/🤗_HuggingFace-Space-ffbd45.svg" alt="HuggingFace"></a>
 
 <br>
 
@@ -39,7 +38,7 @@ pip install --upgrade -r requirements.txt
 
 
 ### 2. Inference
-We provided the integration of diffusers pipeline with our model and uploaded the model weights to huggingface, it's easy to use the our model as example below:
+We provided the integration of FluxPipeline pipeline with our model and uploaded the model weights to huggingface, it's easy to use the our model as example below:
 
 simply run the inference script:
 ```
@@ -48,33 +47,64 @@ python infer_single.py
 
 
 ### 3. Weights
-You can download the trained checkpoints of RelationAdapter for inference. Below are the details of available models, checkpoint name are also trigger words.
+You can download the trained checkpoints of RelationAdapter and LoRA for inference. Below are the details of available models.
 
-You would need to load and fuse the `pretrained ` checkpoints model in order to load the other models.
+You would need to load the `RelationAdapter` checkpoints model in order to fuse the `LoRA` checkpoints.
 
-|                          **Model**                           |                       **Description**                       | **Resolution** |
-| :----------------------------------------------------------: | :---------------------------------------------------------: | :------------: |
-| [pretrained](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/pretrain.safetensors) |       PhotoDoodle model trained on `SeedEdit` dataset       |    768, 768    |
-| [sksmonstercalledlulu](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/sksmonstercalledlulu.safetensors) |   PhotoDoodle model trained on `Cartoon monster` dataset    |    768, 512    |
-| [sksmagiceffects](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/sksmagiceffects.safetensors) |      PhotoDoodle model trained on `3D effects` dataset      |    768, 512    |
-| [skspaintingeffects ](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/skspaintingeffects.safetensors) | PhotoDoodle model trained on `Flowing color blocks` dataset |    768, 512    |
-| [sksedgeeffect ](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/sksedgeeffect.safetensors) |  PhotoDoodle model trained on `Hand-drawn outline` dataset  |    768, 512    |
+|                          **Model**                           |                       **Description**                       |
+| :----------------------------------------------------------: | :---------------------------------------------------------: |
+| [RelationAdapter](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/pretrain.safetensors) |       Additional parameters from the RelationAdapter module are trained on the `Relation252K` dataset       |
+| [LoRA](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/sksmonstercalledlulu.safetensors) |   LoRA parameters are trained on the `Relation252K` dataset    |
 
 
 ### 4. Dataset
 <span id="dataset_setting"></span>
-#### 2.1 Settings for dataset
-The training process uses a paired dataset stored in a .jsonl file, where each entry contains image file paths and corresponding text descriptions. Each entry includes the source image path, the target (modified) image path, and a caption describing the modification.
+#### 2.1 Paired Dataset Format 
+The paired dataset is stored in a .jsonl file, where each entry contains image file paths and corresponding text descriptions. Each entry includes source caption, target caption, and edit instruction describing the transformation from source image to target image.
 
 Example format:
 
 ```json
-{"source": "path/to/source.jpg", "target": "path/to/modified.jpg", "caption": "Instruction of modifications"}
-{"source": "path/to/source2.jpg", "target": "path/to/modified2.jpg", "caption": "Another instruction"}
+      {
+            "left_image_description": "Description of the left image",
+            "right_image_description": "Description of the right image",
+            "edit_instruction": "Instructions for the desired modifications",
+            "img_name": "path/to/image_pair.jpg"
+      },
+      {
+            "left_image_description": "Description of the left image2",
+            "right_image_description": "Description of the right image2",
+            "edit_instruction": "Another instruction",
+            "img_name": "path/to/image_pair2.jpg"
+      }
 ```
-
 We have uploaded our datasets to [Hugging Face](https://huggingface.co/datasets/nicolaus-huang/PhotoDoodle).
 
+#### 2.2 Run-Ready Dataset Generation
+To prepare the dataset for relational learning tasks such as analogy-based instruction scenarios, use the provided script
+```
+python dataset-All-2000-turn-5test.py
+```
+
+This script takes the original paired image dataset and converts it into a structured format where each entry includes:
+Example format:
+
+```json
+      {
+            "cond1": "path/to/prompt_image.jpg",
+            "cond2": "path/to/reference_image.jpg",
+            "source": "path/to/source_image.jpg",
+            "target": "path/to/target_image.jpg",
+            "text": "Instruction for the intended modifications"
+      },
+      {
+            "cond1": "path/to/prompt_image2.jpg",
+            "cond2": "path/to/reference_image2.jpg",
+            "source": "path/to/source_image2.jpg",
+            "target": "path/to/target_image2.jpg",
+            "text": "Instruction for the second modification"
+      }
+```
 
 ### 5. Results
 
