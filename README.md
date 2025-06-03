@@ -113,6 +113,11 @@ Example format:
 
 ## Citation
 ```
-@misc{yangong 
+@unpublished{yan2025relation,
+  author       = {YanGong and Yiren Song and Yicheng Li and Chenglin Li and Yin Zhang},
+  title        = {RelationAdapter: Learning and Transferring Visual Relation with Diffusion Transformers},
+  note         = {Unpublished manuscript},
+  year         = {2025},
+  institution  = {Zhejiang University, National University of Singapore}
 }
 ```
