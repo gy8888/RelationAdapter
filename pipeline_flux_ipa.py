@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 import inspect
 from typing import Any, Callable, Dict, List, Optional, Union
 
@@ -865,7 +866,7 @@ class FluxPipeline(DiffusionPipeline, FluxLoraLoaderMixin, FromSingleFileMixin):
             image = self.vae.decode(latents, return_dict=False)[0]
             image = self.image_processor.postprocess(image, output_type=output_type)
 
-        # Offload all models
+        # Offload all models 
         self.maybe_free_model_hooks()
 
         if not return_dict:
