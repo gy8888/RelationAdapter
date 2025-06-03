@@ -13,8 +13,8 @@
 > <br>
 
 <a href="https://arxiv.org/abs/2502.14397"><img src="https://img.shields.io/badge/ariXv-2502.14397-A42C25.svg" alt="arXiv"></a>
-<a href="https://huggingface.co/nicolaus-huang/PhotoDoodle"><img src="https://img.shields.io/badge/🤗_HuggingFace-Model-ffbd45.svg" alt="HuggingFace"></a>
-<a href="https://huggingface.co/datasets/nicolaus-huang/PhotoDoodle/"><img src="https://img.shields.io/badge/🤗_HuggingFace-Dataset-ffbd45.svg" alt="HuggingFace"></a>
+<a href="https://huggingface.co/handsomeWilliam/RelationAdapter/tree/main"><img src="https://img.shields.io/badge/🤗_HuggingFace-Model-ffbd45.svg" alt="HuggingFace"></a>
+<a href="https://huggingface.co/datasets/handsomeWilliam/Relation252K"><img src="https://img.shields.io/badge/🤗_HuggingFace-Dataset-ffbd45.svg" alt="HuggingFace"></a>
 
 <br>
 
@@ -53,8 +53,8 @@ You would need to load the `RelationAdapter` checkpoints model in order to fuse 
 
 |                          **Model**                           |                       **Description**                       |
 | :----------------------------------------------------------: | :---------------------------------------------------------: |
-| [RelationAdapter](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/pretrain.safetensors) |       Additional parameters from the RelationAdapter module are trained on the `Relation252K` dataset       |
-| [LoRA](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/sksmonstercalledlulu.safetensors) |   LoRA parameters are trained on the `Relation252K` dataset    |
+| [RelationAdapter](https://huggingface.co/handsomeWilliam/RelationAdapter/blob/main/ip_adapter-100000.bin) |       Additional parameters from the RelationAdapter module are trained on the `Relation252K` dataset       |
+| [LoRA](https://huggingface.co/handsomeWilliam/RelationAdapter/blob/main/pytorch_lora_weights.safetensors) |   LoRA parameters are trained on the `Relation252K` dataset    |
 
 
 ### 4. Dataset
@@ -78,7 +78,7 @@ Example format:
             "img_name": "path/to/image_pair2.jpg"
       }
 ```
-We have uploaded our datasets to [Hugging Face](https://huggingface.co/datasets/nicolaus-huang/PhotoDoodle).
+We have uploaded our datasets to [Hugging Face](https://huggingface.co/datasets/handsomeWilliam/Relation252K).
 
 #### 2.2 Run-Ready Dataset Generation
 To prepare the dataset for relational learning tasks such as analogy-based instruction scenarios, use the provided script
