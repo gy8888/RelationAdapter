@@ -12,7 +12,7 @@
 > Zhejiang University, National University of Singapore
 > <br>
 
-<a href="https://arxiv.org/abs/"><img src="https://img.shields.io/badge/ariXv-2505.14397-A42C25.svg" alt="arXiv"></a>
+<a href="https://arxiv.org/abs/2506.02528"><img src="https://img.shields.io/badge/ariXv-2506.02528-A42C25.svg" alt="arXiv"></a>
 <a href="https://huggingface.co/handsomeWilliam/RelationAdapter/tree/main"><img src="https://img.shields.io/badge/🤗_HuggingFace-Model-ffbd45.svg" alt="HuggingFace"></a>
 <a href="https://huggingface.co/datasets/handsomeWilliam/Relation252K"><img src="https://img.shields.io/badge/🤗_HuggingFace-Dataset-ffbd45.svg" alt="HuggingFace"></a>
 
@@ -113,11 +113,13 @@ Example format:
 
 ## Citation
 ```
-@unpublished{yan2025relation,
-  author       = {YanGong and Yiren Song and Yicheng Li and Chenglin Li and Yin Zhang},
-  title        = {RelationAdapter: Learning and Transferring Visual Relation with Diffusion Transformers},
-  note         = {Unpublished manuscript},
-  year         = {2025},
-  institution  = {Zhejiang University, National University of Singapore}
+@misc{gong2025relationadapterlearningtransferringvisual,
+      title={RelationAdapter: Learning and Transferring Visual Relation with Diffusion Transformers}, 
+      author={Yan Gong and Yiren Song and Yicheng Li and Chenglin Li and Yin Zhang},
+      year={2025},
+      eprint={2506.02528},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2506.02528}, 
 }
 ```
