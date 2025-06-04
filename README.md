@@ -59,7 +59,7 @@ You would need to load the `RelationAdapter` checkpoints model in order to fuse 
 
 ### 4. Dataset
 <span id="dataset_setting"></span>
-#### 2.1 Paired Dataset Format 
+#### 4.1 Paired Dataset Format 
 The paired dataset is stored in a .jsonl file, where each entry contains image file paths and corresponding text descriptions. Each entry includes source caption, target caption, and edit instruction describing the transformation from source image to target image.
 
 Example format:
@@ -80,7 +80,7 @@ Example format:
 ```
 We have uploaded our datasets to [Hugging Face](https://huggingface.co/datasets/handsomeWilliam/Relation252K).
 
-#### 2.2 Run-Ready Dataset Generation
+#### 4.2 Run-Ready Dataset Generation
 To prepare the dataset for relational learning tasks such as analogy-based instruction scenarios, use the provided script
 ```
 python dataset-All-2000-turn-5test.py
