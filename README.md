@@ -113,13 +113,10 @@ Example format:
 
 ## Citation
 ```
-@misc{gong2025relationadapterlearningtransferringvisual,
-      title={RelationAdapter: Learning and Transferring Visual Relation with Diffusion Transformers}, 
-      author={Yan Gong and Yiren Song and Yicheng Li and Chenglin Li and Yin Zhang},
-      year={2025},
-      eprint={2506.02528},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2506.02528}, 
+@inproceedings{gong2025relationadapter,
+  title={RelationAdapter: Learning and Transferring Visual Relation with Diffusion Transformers},
+  author={Gong, Yan and Song, Yiren and Li, Yicheng and Li, Chenglin and Zhang, Yin},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2025}
 }
 ```
